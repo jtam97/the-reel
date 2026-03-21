@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300" fill="none">
+  <rect width="200" height="300" fill="#2C1810"/>
+  <rect x="10" y="10" width="180" height="280" rx="4" stroke="#D4AF37" stroke-opacity="0.2" stroke-width="1" fill="none"/>
+  <text x="100" y="140" text-anchor="middle" font-family="serif" font-size="16" fill="#D4AF37" opacity="0.4">No</text>
+  <text x="100" y="165" text-anchor="middle" font-family="serif" font-size="16" fill="#D4AF37" opacity="0.4">Poster</text>
+  <circle cx="100" cy="100" r="25" stroke="#D4AF37" stroke-opacity="0.2" stroke-width="1" fill="none"/>
+  <path d="M88 100 L112 100 M100 88 L100 112" stroke="#D4AF37" stroke-opacity="0.15" stroke-width="1"/>
+</svg>

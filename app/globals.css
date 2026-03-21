@@ -1,0 +1,347 @@
+@import "tailwindcss";
+
+:root {
+  --gold: #D4AF37;
+  --gold-light: #F5E09A;
+  --crimson: #8B0000;
+  --crimson-bright: #C41E3A;
+  --neon-red: #FF2020;
+  --cream: #F5F0E8;
+  --dark: #0A0A0A;
+  --dark-mid: #1A1209;
+  --film-brown: #2C1810;
+  --background: var(--dark);
+  --foreground: var(--cream);
+}
+
+@theme inline {
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-crimson: var(--crimson);
+  --color-crimson-bright: var(--crimson-bright);
+  --color-neon-red: var(--neon-red);
+  --color-cream: var(--cream);
+  --color-dark: var(--dark);
+  --color-dark-mid: var(--dark-mid);
+  --color-film-brown: var(--film-brown);
+}
+
+/* ===== BASE STYLES ===== */
+
+body {
+  background: var(--dark);
+  color: var(--cream);
+  overflow-x: hidden;
+}
+
+/* ===== FILM GRAIN OVERLAY ===== */
+
+.film-grain::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain 8s steps(10) infinite;
+  opacity: 0.5;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+/* ===== TICKER ===== */
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===== VIGNETTE ===== */
+
+.vignette::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.7) 100%);
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* ===== FLICKER ANIMATION ===== */
+
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 1;
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.85;
+  }
+}
+
+.flicker {
+  animation: flicker 3s linear infinite;
+}
+
+@keyframes flicker-slow {
+  0%, 100% { opacity: 1; }
+  41% { opacity: 1; }
+  42% { opacity: 0.8; }
+  43% { opacity: 1; }
+  45% { opacity: 0.3; }
+  46% { opacity: 1; }
+  78% { opacity: 1; }
+  79% { opacity: 0.7; }
+  80% { opacity: 1; }
+}
+
+.flicker-slow {
+  animation: flicker-slow 5s linear infinite;
+}
+
+/* ===== GLOW EFFECTS ===== */
+
+.glow-gold {
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.5), 0 0 30px rgba(212, 175, 55, 0.2);
+}
+
+.glow-red {
+  box-shadow: 0 0 15px rgba(255, 32, 32, 0.5), 0 0 30px rgba(255, 32, 32, 0.2);
+}
+
+.glow-gold-text {
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.6), 0 0 20px rgba(212, 175, 55, 0.3), 0 0 40px rgba(212, 175, 55, 0.15);
+}
+
+.glow-red-text {
+  text-shadow: 0 0 10px rgba(255, 32, 32, 0.6), 0 0 20px rgba(255, 32, 32, 0.3);
+}
+
+/* ===== PULSE GLOW ===== */
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.6), 0 0 50px rgba(212, 175, 55, 0.2); }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ===== SPROCKET HOLES ===== */
+
+.sprocket-left,
+.sprocket-right {
+  position: fixed;
+  top: 0;
+  width: 36px;
+  height: 100%;
+  z-index: 40;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 20px,
+    rgba(212, 175, 55, 0.12) 20px,
+    rgba(212, 175, 55, 0.12) 22px,
+    transparent 22px,
+    transparent 26px,
+    var(--film-brown) 26px,
+    var(--film-brown) 46px,
+    transparent 46px,
+    transparent 50px,
+    rgba(212, 175, 55, 0.12) 50px,
+    rgba(212, 175, 55, 0.12) 52px,
+    transparent 52px,
+    transparent 60px
+  );
+}
+
+.sprocket-left::after,
+.sprocket-right::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 14px;
+  height: 100%;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 28px,
+    rgba(10, 10, 10, 0.9) 28px,
+    rgba(10, 10, 10, 0.9) 44px,
+    transparent 44px,
+    transparent 60px
+  );
+}
+
+.sprocket-left {
+  left: 0;
+  border-right: 2px solid rgba(212, 175, 55, 0.15);
+}
+
+.sprocket-left::after {
+  left: 11px;
+  border-radius: 2px;
+}
+
+.sprocket-right {
+  right: 0;
+  border-left: 2px solid rgba(212, 175, 55, 0.15);
+}
+
+.sprocket-right::after {
+  right: 11px;
+  border-radius: 2px;
+}
+
+/* ===== FILM STRIP (Timeline) ===== */
+
+.film-strip-bg {
+  background-image:
+    repeating-linear-gradient(
+      to right,
+      transparent 0px,
+      transparent 25px,
+      rgba(44, 24, 16, 0.6) 25px,
+      rgba(44, 24, 16, 0.6) 45px,
+      transparent 45px,
+      transparent 70px
+    );
+  background-size: 70px 100%;
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--film-brown);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* ===== TICKET STUB BUTTON ===== */
+
+.ticket-stub {
+  position: relative;
+  background: linear-gradient(135deg, var(--crimson) 0%, var(--crimson-bright) 100%);
+  border: 2px solid var(--gold);
+  padding: 1.5rem 3rem;
+  clip-path: polygon(
+    0% 0%, 4% 5%, 0% 10%, 4% 15%, 0% 20%, 4% 25%, 0% 30%, 4% 35%, 0% 40%, 4% 45%, 0% 50%,
+    4% 55%, 0% 60%, 4% 65%, 0% 70%, 4% 75%, 0% 80%, 4% 85%, 0% 90%, 4% 95%, 0% 100%,
+    100% 100%, 96% 95%, 100% 90%, 96% 85%, 100% 80%, 96% 75%, 100% 70%, 96% 65%, 100% 60%,
+    96% 55%, 100% 50%, 96% 45%, 100% 40%, 96% 35%, 100% 30%, 96% 25%, 100% 20%, 96% 15%,
+    100% 10%, 96% 5%, 100% 0%
+  );
+  transition: all 0.3s ease;
+}
+
+.ticket-stub:hover {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.5), 0 0 60px rgba(212, 175, 55, 0.2);
+  transform: scale(1.05);
+}
+
+/* ===== FILM COUNTDOWN LOADER ===== */
+
+@keyframes countdown-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes countdown-number {
+  0% { content: "3"; opacity: 1; }
+  30% { opacity: 0; }
+  33% { content: "2"; opacity: 1; }
+  63% { opacity: 0; }
+  66% { content: "1"; opacity: 1; }
+  96% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.countdown-circle {
+  animation: countdown-rotate 1s linear infinite;
+}
+
+/* ===== MOVIE CARD ===== */
+
+.movie-card {
+  border: 2px solid rgba(44, 24, 16, 0.8);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.movie-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+}
+
+/* ===== MODAL ===== */
+
+.modal-overlay {
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.modal-content {
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.2), 0 0 80px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== HORIZONTAL SCROLL ===== */
+
+.horizontal-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+/* ===== CALENDAR ===== */
+
+.calendar-cell {
+  border: 1px solid rgba(44, 24, 16, 0.4);
+  transition: all 0.2s ease;
+}
+
+.calendar-cell:hover {
+  border-color: var(--gold);
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.calendar-highlight {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.3), 0 0 5px rgba(255, 32, 32, 0.2);
+}
