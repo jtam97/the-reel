@@ -20,7 +20,7 @@ export default function FilmStrip({ movies, onMovieClick }: FilmStripProps) {
     const handleWheel = (e: WheelEvent) => {
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
         e.preventDefault();
-        el.scrollLeft += e.deltaY;
+        el.scrollLeft += e.deltaY * 4.0;
       }
     };
 
