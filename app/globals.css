@@ -326,7 +326,11 @@ body {
 }
 
 .horizontal-scroll::-webkit-scrollbar {
-  height: 6px;
+  display: none;
+}
+
+.horizontal-scroll {
+  scrollbar-width: none; /* Firefox */
 }
 
 /* ===== CALENDAR ===== */

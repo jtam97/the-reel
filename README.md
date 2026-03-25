@@ -27,4 +27,4 @@ This product uses the [TMDB API](https://www.themoviedb.org/) but is not endorse
 
 ## Author
 
-Built by [Justin Z Tam](https://projects.justinztam.com/)
+Built by [Justin Z Tam](https://justinztam.com/). Here are more [projects](https://projects.justinztam.com/) built by me.
